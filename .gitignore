@@ -1,1 +1,22 @@
+# Secrets (mots de passe, clés d'API) : ne jamais les publier
 .env
+
+# Environnement virtuel : chacun le recrée avec requirements.txt
+.venv/
+
+# Fichiers générés automatiquement par Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Fichiers système / éditeur
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
