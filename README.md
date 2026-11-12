@@ -46,5 +46,5 @@ Chaque membre pilote une partie, mais tout le monde doit savoir expliquer l'ense
 | Rôle | Membre | Responsable de |
 |---|---|---|
 | Data Engineer | Edvige | Collecte, nettoyage, variables (forme récente, lieu, Elo), pipeline, git |
-| Data Analyst | _à compléter_ | Notebook d'exploration, dashboard Streamlit, support de soutenance |
-| Data Scientist | _à compléter_ | Modèle naïf, modèles de ML, validation, simulation 2030 |
+| Data Analyst | Kerem | Notebook d'exploration, dashboard Streamlit, support de soutenance |
+| Data Scientist | Quochuy | Modèle naïf, modèles de ML, validation, simulation 2030 |
