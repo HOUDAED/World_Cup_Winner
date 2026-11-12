@@ -1,0 +1,14 @@
+# Versions figées (==) pour que tout le monde ait exactement le même environnement
+# -> le projet se relance de façon identique sur n'importe quelle machine.
+
+# Manipulation des données (tableaux, dates, calculs)
+pandas==3.1.1
+numpy==2.5.4
+# Modèles de machine learning et métriques
+scikit-learn==1.9.1
+# Graphiques
+matplotlib==3.11.2
+# Notebook d'exploration
+jupyter==1.1.1
+# Dashboard
+streamlit==1.67.0
