@@ -1,12 +1,13 @@
+import sys
 from pathlib import Path
-from urllib.request import urlopen 
+from urllib.error import HTTPError, URLError
+from urllib.request import urlopen
 
 import pandas as pd
 
 # Adresse de base des fichiers bruts sur GitHub
 BASE_URL = "https://raw.githubusercontent.com/martj42/international_results/master/"
 
-# Fichiers à récupérer, avec leur rôle dans le projet
 FILES = {
     "results.csv": "tous les matchs internationaux depuis 1872",
     "former_names.csv": "anciens noms des pays (ex. Zaïre -> RD Congo)",
@@ -17,16 +18,22 @@ RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
 
 
 def download_file(filename: str) -> Path:
-    """Télécharge un fichier depuis la source et l'enregistre dans data/raw/."""
     url = BASE_URL + filename
     destination = RAW_DIR / filename
-    with urlopen(url, timeout=30) as response:
-        destination.write_bytes(response.read())
+    try:
+        with urlopen(url, timeout=30) as response:
+            content = response.read()
+    except HTTPError as error:
+        sys.exit(f"Erreur : le serveur a répondu {error.code} pour {url}")
+    except (URLError, TimeoutError) as error:
+        sys.exit(f"Erreur : connexion impossible ({error}). Vérifie ta connexion internet puis relance.")
+
+    # On écrit seulement une fois le téléchargement terminé: en cas d'erreur, l'ancien fichier n'est pas écrasé.
+    destination.write_bytes(content)
     return destination
 
 
 def check_file(path: Path) -> None:
-    """Contrôle rapide : le fichier se lit comme un CSV et n'est pas vide."""
     df = pd.read_csv(path)
     if df.empty:
         raise ValueError(f"{path.name} est vide : le téléchargement a échoué")
